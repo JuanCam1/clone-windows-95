@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import DraggableIcon from "../sections/DraggableIcon";
 import { useState, type ReactNode } from "react";
-import { Calculator, Edit, FileText, Folder, Settings } from "lucide-react";
+import { Edit, Folder } from "lucide-react";
 import { gridToPixel } from "../utils/gridToPixel";
 import { GRID_SIZE, ICON_OFFSET } from "../consts";
 import { pixelToGrid } from "../utils/pixelToGrid";
@@ -12,6 +12,7 @@ import Taskbar from "../components/TaskBar";
 import StartMenu from "../sections/StartMenu";
 import ContextMenu from "../sections/ContextMenu";
 import IconContextMenu from "../components/IconContextMenu";
+import calculator from "../assets/images/calculator-0.png";
 
 export const Route = createFileRoute("/desktop")({
   component: RouteComponent,
@@ -22,7 +23,7 @@ function RouteComponent() {
     {
       id: "calculator",
       name: "Calculator",
-      icon: <Calculator className="w-full h-full" />,
+      icon: calculator,
       position: gridToPixel(0, 0),
       app: "calculator",
       type: "application",
@@ -30,7 +31,7 @@ function RouteComponent() {
     {
       id: "notepad",
       name: "Notepad",
-      icon: <FileText className="w-full h-full" />,
+      icon: calculator,
       position: gridToPixel(0, 1),
       app: "notepad",
       type: "application",
@@ -38,7 +39,7 @@ function RouteComponent() {
     {
       id: "explorer",
       name: "My Computer",
-      icon: <Folder className="w-full h-full" />,
+      icon: calculator,
       position: gridToPixel(0, 2),
       app: "explorer",
       type: "application",
@@ -46,7 +47,7 @@ function RouteComponent() {
     {
       id: "settings",
       name: "Control Panel",
-      icon: <Settings className="w-full h-full" />,
+      icon: calculator,
       position: gridToPixel(0, 3),
       app: "settings",
       type: "application",
@@ -137,7 +138,7 @@ function RouteComponent() {
       icon: <Folder className="w-full h-full" />,
       position,
       type: "folder",
-      isEditing: true, // Start in editing mode
+      isEditing: true,
     };
 
     setIcons((prev) => [...prev, newFolder]);

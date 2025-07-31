@@ -106,7 +106,17 @@ const DraggableIcon: FC<Props> = ({
       onDoubleClick={() => !icon.isEditing && onDoubleClick(icon.id)}
       onContextMenu={handleRightClick}
     >
-      <div className="w-8 h-8 mb-1 text-white">{icon.icon}</div>
+      <div className="w-8 h-8 mb-1">
+        {typeof icon.icon === "string" ? (
+          <img
+            src={typeof icon.icon === "string" ? icon.icon : icon.icon}
+            alt="icon"
+            className="w-full h-full"
+          />
+        ) : (
+          icon.icon
+        )}
+      </div>
       {icon.isEditing ? (
         <input
           ref={inputRef}

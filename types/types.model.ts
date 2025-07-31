@@ -1,3 +1,5 @@
+import type { ReactNode } from "react";
+
 export interface PositionModel {
   x: number;
   y: number;
@@ -6,7 +8,7 @@ export interface PositionModel {
 export interface DesktopIconModel {
   id: string;
   name: string;
-  icon: React.ReactNode;
+  icon: string | ReactNode;
   position: PositionModel;
   app?: string;
   type: "application" | "folder";
@@ -16,7 +18,7 @@ export interface DesktopIconModel {
 export interface OpenWindowModel {
   id: string;
   title: string;
-  component: React.ReactNode;
+  component: ReactNode;
   position: PositionModel;
   size: { width: number; height: number };
   isMinimized: boolean;
@@ -44,7 +46,7 @@ export interface IconContextMenuPropsModel {
 export interface MenuItemModel {
   id: string;
   label: string;
-  icon?: React.ReactNode;
+  icon?: ReactNode;
   action?: () => void;
   submenu?: MenuItemModel[];
 }
