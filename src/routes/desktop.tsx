@@ -219,7 +219,7 @@ function RouteComponent() {
       case "calculator":
         component = <CalculatorApp />;
         title = "Calculator";
-        size = { width: 280, height: 400 };
+        size = { width: 280, height: 300 };
         break;
       case "notepad":
         component = (

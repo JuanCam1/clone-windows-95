@@ -1,4 +1,6 @@
-import { useCallback, useEffect, useState, type FC } from "react";
+import { type FC } from "react";
+import Button from "../components/Button";
+import useWindow from "../hooks/useWindow";
 
 interface Props {
   window: OpenWindowModelI;
@@ -15,49 +17,9 @@ const Window: FC<Props> = ({
   onFocus,
   isActive,
 }) => {
-  const [position, setPosition] = useState(window.position);
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    onFocus(window.id);
-    const rect = e.currentTarget.getBoundingClientRect();
-    setDragOffset({
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-    });
-    setIsDragging(true);
-  };
-
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      if (isDragging) {
-        setPosition({
-          x: e.clientX - dragOffset.x,
-          y: e.clientY - dragOffset.y,
-        });
-      }
-    },
-    [isDragging, dragOffset]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
-      };
-    }
-  }, [isDragging, handleMouseMove, handleMouseUp]);
-
   if (window.isMinimized) return null;
 
+  const { position, handleMouseDown } = useWindow({ window, onFocus });
   return (
     <div
       className={`absolute bg-gray-200 border-2 border-gray-400 shadow-lg transition-all duration-200 ${
@@ -79,20 +41,18 @@ const Window: FC<Props> = ({
       >
         <span className="text-sm font-bold">{window.title}</span>
         <div className="flex gap-1">
-          <button
+          <Button
             onClick={() => onMinimize(window.id)}
-            className="w-4 h-4 p-0 bg-gray-300 hover:bg-gray-400 text-black border border-gray-400"
-            style={{ borderStyle: "outset" }}
+            className="size-4 flex justify-center items-center"
           >
-            _
-          </button>
-          <button
+            -
+          </Button>
+          <Button
             onClick={() => onClose(window.id)}
-            className="w-4 h-4 p-0 bg-red-400 hover:bg-red-500 text-black border border-gray-400"
-            style={{ borderStyle: "outset" }}
+            className="size-4 flex justify-center items-center"
           >
-            ×
-          </button>
+            x
+          </Button>
         </div>
       </div>
       <div className="p-2 h-full overflow-auto">{window.component}</div>
