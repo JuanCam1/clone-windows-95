@@ -1,18 +1,25 @@
 import { useCallback, useEffect, useState } from "react";
 
 const useWindow = ({
-  window,
+  windowProps,
   onFocus,
 }: {
-  window: OpenWindowModelI;
+  windowProps: OpenWindowModelI;
   onFocus: (id: string) => void;
 }) => {
-  const [position, setPosition] = useState(window.position);
+  const [position, setPosition] = useState(windowProps.position);
   const [isDragging, setIsDragging] = useState(false);
   const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
 
+  // Centrar al abrir
+  useEffect(() => {
+    const centerX = (window.innerWidth - (windowProps.size.width ?? 400)) / 2;
+    const centerY = (window.innerHeight - (windowProps.size.height ?? 300)) / 2;
+    setPosition({ x: centerX, y: centerY });
+  }, [windowProps.size.width, windowProps.size.height]);
+
   const handleMouseDown = (e: React.MouseEvent) => {
-    onFocus(window.id);
+    onFocus(windowProps.id);
     const rect = e.currentTarget.getBoundingClientRect();
     setDragOffset({
       x: e.clientX - rect.left,

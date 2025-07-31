@@ -42,7 +42,7 @@ const useDraggableIcon = ({
         y: e.clientY - rect.top,
       });
       setIsDragging(true);
-      e.preventDefault(); // Evita seleccionar texto al hacer drag
+      e.preventDefault();
     }
   };
 

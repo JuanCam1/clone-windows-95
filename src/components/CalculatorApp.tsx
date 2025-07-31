@@ -5,7 +5,7 @@ const CalculatorApp = () => {
     useCalculator();
   return (
     <div
-      className="bg-gray-200 p-2 w-64  border-2 border-gray-400 select-none"
+      className="bg-gray-200 p-2 w-64 border-2 border-gray-400 select-none"
       style={{ borderStyle: "inset" }}
     >
       <div

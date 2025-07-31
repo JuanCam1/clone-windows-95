@@ -193,7 +193,7 @@ const useDesktop = () => {
       case "paint":
         component = <PaintApp />;
         title = "Paint";
-        size = { width: 400, height: 300 };
+        size = { width: 900, height: 650 };
         break;
       default:
         component = <div className="p-4">Application not implemented yet</div>;

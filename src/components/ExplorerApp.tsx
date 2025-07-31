@@ -3,7 +3,7 @@ import { Folder } from "lucide-react";
 const ExplorerApp = () => {
   return (
     <div
-      className="w-full h-full bg-white border-2 border-gray-400"
+      className="w-full h-[88%] bg-white border-2 border-gray-400"
       style={{ borderStyle: "inset" }}
     >
       <div className="p-2">

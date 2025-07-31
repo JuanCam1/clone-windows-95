@@ -19,7 +19,10 @@ const Window: FC<Props> = ({
 }) => {
   if (window.isMinimized) return null;
 
-  const { position, handleMouseDown } = useWindow({ window, onFocus });
+  const { position, handleMouseDown } = useWindow({
+    windowProps: window,
+    onFocus,
+  });
   return (
     <div
       className={`absolute bg-gray-200 border-2 border-gray-400 shadow-lg transition-all duration-200 ${
