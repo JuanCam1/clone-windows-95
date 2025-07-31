@@ -1,11 +1,5 @@
-import {
-  useCallback,
-  useEffect,
-  useRef,
-  useState,
-  type FC,
-  type KeyboardEvent,
-} from "react";
+import { type FC } from "react";
+import useDraggableIcon from "../hooks/useDraggableIcon";
 
 interface Props {
   icon: DesktopIconModelI;
@@ -22,80 +16,16 @@ const DraggableIcon: FC<Props> = ({
   onRightClick,
   onNameChange,
 }) => {
-  const [isDragging, setIsDragging] = useState(false);
-  const [dragOffset, setDragOffset] = useState({ x: 0, y: 0 });
-  const [editingName, setEditingName] = useState(icon.name);
-  const iconRef = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  useEffect(() => {
-    if (icon.isEditing && inputRef.current) {
-      inputRef.current.focus();
-      inputRef.current.select();
-    }
-  }, [icon.isEditing]);
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    if (icon.isEditing) return;
-
-    if (iconRef.current) {
-      const rect = iconRef.current.getBoundingClientRect();
-      setDragOffset({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      });
-      setIsDragging(true);
-    }
-  };
-
-  const handleRightClick = (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    onRightClick(icon.id, { x: e.clientX, y: e.clientY });
-  };
-
-  const handleMouseMove = useCallback(
-    (e: MouseEvent) => {
-      if (isDragging && !icon.isEditing) {
-        const newPosition = {
-          x: e.clientX - dragOffset.x,
-          y: e.clientY - dragOffset.y,
-        };
-        onMove(icon.id, newPosition);
-      }
-    },
-    [isDragging, dragOffset, icon.id, icon.isEditing, onMove]
-  );
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const handleNameSubmit = () => {
-    if (editingName.trim()) {
-      onNameChange(icon.id, editingName.trim());
-    }
-  };
-
-  const handleKeyDown = (e: KeyboardEvent) => {
-    if (e.key === "Enter") {
-      handleNameSubmit();
-    } else if (e.key === "Escape") {
-      setEditingName(icon.name);
-      onNameChange(icon.id, icon.name);
-    }
-  };
-
-  useEffect(() => {
-    if (isDragging) {
-      document.addEventListener("mousemove", handleMouseMove);
-      document.addEventListener("mouseup", handleMouseUp);
-      return () => {
-        document.removeEventListener("mousemove", handleMouseMove);
-        document.removeEventListener("mouseup", handleMouseUp);
-      };
-    }
-  }, [isDragging, handleMouseMove, handleMouseUp]);
+  const {
+    handleMouseDown,
+    handleRightClick,
+    handleKeyDown,
+    iconRef,
+    inputRef,
+    editingName,
+    setEditingName,
+    handleNameSubmit,
+  } = useDraggableIcon({ icon, onMove, onRightClick, onNameChange });
 
   return (
     <div
@@ -127,7 +57,7 @@ const DraggableIcon: FC<Props> = ({
           className="text-xs text-center px-1 bg-white text-black rounded border border-blue-500 w-16"
         />
       ) : (
-        <span className="text-xs text-white text-center px-1 bg-black bg-opacity-50 rounded max-w-16 truncate">
+        <span className="text-xs text-white text-center px-1 bg-opacity-50 rounded max-w-16 font-w95fa font-base leading-tight break-words line-clamp-2">
           {icon.name}
         </span>
       )}
