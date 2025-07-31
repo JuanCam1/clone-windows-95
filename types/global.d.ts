@@ -5,6 +5,7 @@ import {
   MenuItemModel,
   DesktopIconModel,
   OpenWindowModel,
+  type PersonalInfoModel,
 } from "./types.model";
 
 declare global {
@@ -14,4 +15,5 @@ declare global {
   type MenuItemModelI = MenuItemModel;
   type DesktopIconModelI = DesktopIconModel;
   type OpenWindowModelI = OpenWindowModel;
+  type PersonalInfoModelI = PersonalInfoModel;
 }

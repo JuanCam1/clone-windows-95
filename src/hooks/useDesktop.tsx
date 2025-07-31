@@ -9,6 +9,7 @@ import CalculatorApp from "../components/CalculatorApp";
 import NoteApp from "../components/NoteApp";
 import PaintApp from "../components/PaintApp";
 import ExplorerApp from "../components/ExplorerApp";
+import TerminalApp from "../components/TerminalApp";
 
 const useDesktop = () => {
   const [icons, setIcons] = useState<DesktopIconModelI[]>(apps);
@@ -194,6 +195,11 @@ const useDesktop = () => {
         component = <PaintApp />;
         title = "Paint";
         size = { width: 900, height: 650 };
+        break;
+      case "terminal":
+        component = <TerminalApp />;
+        title = "Simbolo de sistema";
+        size = { width: 500, height: 350 };
         break;
       default:
         component = <div className="p-4">Application not implemented yet</div>;

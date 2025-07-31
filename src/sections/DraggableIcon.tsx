@@ -57,7 +57,7 @@ const DraggableIcon: FC<Props> = ({
           className="text-xs text-center px-1 bg-white text-black rounded border border-blue-500 w-16"
         />
       ) : (
-        <span className="text-xs text-white text-center px-1 bg-opacity-50 rounded max-w-16 font-w95fa font-medium leading-tight break-words line-clamp-2">
+        <span className="tracking-wider text-xs text-white text-center px-1 bg-opacity-50 rounded max-w-16 font-w95fa font-medium leading-tight break-words line-clamp-2">
           {icon.name}
         </span>
       )}

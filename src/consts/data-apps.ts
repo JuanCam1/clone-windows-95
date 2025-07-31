@@ -37,4 +37,12 @@ export const apps: DesktopIconModelI[] = [
     app: "paint",
     type: "application",
   },
+  {
+    id: "terminal",
+    name: "Terminal",
+    icon: explorer,
+    position: gridToPixel(0, 3),
+    app: "terminal",
+    type: "application",
+  },
 ];

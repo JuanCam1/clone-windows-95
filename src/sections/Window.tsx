@@ -39,7 +39,7 @@ const Window: FC<Props> = ({
       onClick={() => onFocus(window.id)}
     >
       <div
-        className="bg-gradient-to-r from-blue-600 to-blue-800 text-white px-2 py-1 cursor-move flex justify-between items-center"
+        className="bg-gradient-to-r from-blue-600 to-blue-700 text-white px-2 py-1 cursor-move flex justify-between items-center"
         onMouseDown={handleMouseDown}
       >
         <span className="text-sm font-bold">{window.title}</span>

@@ -62,11 +62,12 @@ const PaintApp = () => {
 
   return (
     <div
-      className="w-full h-[95%] bg-white border-2 border-gray-400"
+      className="w-full h-[95%] flex flex-col bg-white border-2 border-gray-400"
       style={{ borderStyle: "inset" }}
     >
-      <div className="flex">
-        <div className="w-8 bg-gray-300 p-0.5 border-r border-gray-400">
+      <div className="flex flex-grow overflow-hidden">
+        {/* Sidebar */}
+        <div className="w-8 bg-gray-300 p-0.5 border-r border-gray-400 flex flex-col items-center">
           <button
             className={`w-7 h-7 p-0 min-w-0 mb-0.5 flex justify-center items-center ${tool === "brush" ? "bg-gray-400 border border-gray-400 shadow-inner" : ""}`}
             onClick={() => setTool("brush")}
@@ -110,10 +111,8 @@ const PaintApp = () => {
             <Trash calcMode="discrete" className="w-5 h-5" />
           </button>
         </div>
-        <div
-          className="flex-grow overflow-auto border border-gray-400"
-          style={{ width: "724px", height: "500px" }}
-        >
+
+        <div className="flex-grow overflow-auto border border-gray-400">
           <canvas
             ref={canvasRef}
             width={2000}
@@ -122,21 +121,24 @@ const PaintApp = () => {
             onMouseMove={draw}
             onMouseUp={stopDrawing}
             onMouseOut={stopDrawing}
+            className="w-full h-full block"
           />
         </div>
       </div>
+
       <div className="flex bg-gray-300 p-1 border-t border-gray-400">
         <div className="flex flex-wrap gap-1">
           {colors.map((c) => (
             <button
               key={c}
-              className={`w-6 h-6 p-0 min-w-0 ${color === c ? "ring-1 ring-gray-600" : ""}`}
+              className={`w-6 h-6 ${color === c ? "ring-1 ring-gray-600" : ""}`}
               style={{ backgroundColor: c }}
               onClick={() => setColor(c)}
             />
           ))}
         </div>
       </div>
+
       <div className="bg-gray-300 px-2 py-1 text-sm border-t border-gray-400">
         For Help, click Help Topics on the Help Menu.
       </div>

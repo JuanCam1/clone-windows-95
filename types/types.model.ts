@@ -50,3 +50,11 @@ export interface MenuItemModel {
   action?: () => void;
   submenu?: MenuItemModel[];
 }
+
+export interface PersonalInfoModel {
+  name: string;
+  github: string;
+  skills: string;
+  bio: string;
+  contact: string;
+}
