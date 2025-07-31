@@ -1,1 +1,13 @@
+@font-face {
+  font-family: "W95fa";
+  src: url("./assets/font/w95fa/w95fa.woff2") format("woff2");
+  font-weight: 200 400 700;
+  font-display: swap;
+  font-style: normal;
+}
+
 @import "tailwindcss";
+
+@theme {
+  --font-w95fa: "W95fa", sans-serif;
+}
